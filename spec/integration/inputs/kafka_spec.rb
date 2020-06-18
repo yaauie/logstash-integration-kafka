@@ -124,7 +124,7 @@ describe "inputs/kafka", :integration => true do
   private
 
   def consume_messages(config, queue: Queue.new, timeout:, event_count:)
-    kafka_input = LogStash::Inputs::Kafka.new(config)
+    kafka_input = LogStash::Inputs::Kafka.new(config).tap(&:register)
     t = Thread.new { kafka_input.run(queue) }
     begin
       t.run
