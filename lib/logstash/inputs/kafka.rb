@@ -276,6 +276,8 @@ class LogStash::Inputs::Kafka < LogStash::Inputs::Base
                 event.set("[@metadata][kafka][offset]", record.offset)
                 event.set("[@metadata][kafka][key]", record.key)
                 event.set("[@metadata][kafka][timestamp]", record.timestamp)
+                event.set("[@metadata][kafka][serialized_key_size]", record.serialized_key_size)
+                event.set("[@metadata][kafka][serialized_value_size]", record.serialized_value_size)
               end
               logstash_queue << event
             end

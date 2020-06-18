@@ -86,6 +86,8 @@ describe "inputs/kafka", :integration => true do
         expect(event.get("[@metadata][kafka][topic]")).to eq("logstash_integration_topic_plain")
         expect(event.get("[@metadata][kafka][consumer_group]")).to eq(group_id_3)
         expect(event.get("[@metadata][kafka][timestamp]")).to be >= start
+        expect(event.get("[@metadata][kafka][serialized_key_size]")).to eq(-1) # kafka-console-producer produces null keys
+        expect(event.get("[@metadata][kafka][serialized_value_size]")).to be_a_kind_of(Integer).and(be > 0)
       end
     end
   end
